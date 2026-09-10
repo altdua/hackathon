@@ -1,0 +1,141 @@
+Quantexa mock data — what each file is
+=====================================
+Generated 10 Sep 2026. All people and identifiers are fictitious.
+Phones use the Ofcom drama range 07700 900xxx.
+
+These files pretend to be extracts from five disconnected systems.
+They are deliberately inconsistent (names, dates, postcodes, address order)
+so an entity-resolution step has something to do.
+
+
+1. mcc_housing_tenancies_extract.csv
+------------------------------------
+Pretend source: Manchester City Council housing management system
+                (styled as an Orchard Housing nightly extract).
+
+What it contains:
+  Current and former council tenancies. One row per tenancy.
+  Fields include tenancy/property refs, name in SURNAME + FORENAME
+  (often an initial), DOB as dd/mm/yyyy, address, postcode with or
+  without a space, rent, weeks in arrears, last housing-officer visit
+  and outcome, open ASB case refs, contact telephone.
+
+Why it is messy:
+  Maggie Hale is stored as HALE / M, DOB 12/03/1959, postcode M46LN
+  (no space). ASB is logged against the PROPERTY, not as a finding
+  that she is the perpetrator. Her son Daniel appears as a FORMER
+  tenancy (evicted), same mobile number.
+
+
+2. gp_emis_extract_mft.json
+---------------------------
+Pretend source: GP clinical system export
+                (EMIS Web, packaged as an FHIR-like Bundle).
+
+What it contains:
+  Patient demographics, conditions and appointments in one JSON
+  document (a single object — this is .json, not .jsonl).
+  NHS number lives only in this file.
+
+Why it is messy:
+  Maggie appears as "Maggie Hale" with an old name "Margaret Hale".
+  DOB is ISO 1959-03-12. Postcode is M4 6LN (with space).
+  Household status = lives alone. Active depression code.
+  Three appointments with status "noshow" (DNA) on 14 Jul, 4 Aug
+  and 1 Sep 2026.
+
+  Also includes two different John Smiths so you can test a refused
+  merge (same name, adjacent Hulme addresses, different DOBs).
+
+
+3. adult_social_care_mosaic_extract.csv
+   adult_social_care_mosaic_extract.xlsx
+---------------------------------------
+Pretend source: Adult Social Care case system
+                (Mosaic export). CSV is the raw table.
+                XLSX is the same data with a typical extract banner,
+                frozen header and filter row.
+
+What it contains:
+  Case ID, internal PersonRef (not an NHS number), display name,
+  a concatenated AgeSex field, loosely typed DOB text, address as
+  a single string, contact date, pathway, case status, allocated
+  team/worker, RAG, notes.
+
+Why it is messy:
+  Maggie is "Hale / female", AgeSex = "67y female", DOB = "Mar 1959".
+  Address order is "Ancoats, 18 Bengal St, Manchester".
+  Case ASC/26/10994 is Open - low level.
+  AllocatedWorker is blank (duty queue, no named worker).
+  No Care Act assessment.
+
+
+4. foodbank_visits_ancoats.jsonl
+--------------------------------
+Pretend source: Ancoats Community Pantry tap-log
+                (local Trussell-style visit log dumped to JSON Lines).
+
+Format:
+  .jsonl = JSON Lines. One JSON object per line. Not a wrapping
+  array. Read with json.loads() on each line, not json.load()
+  on the whole file.
+
+What it contains:
+  Visit id, timestamp, first name only, postcode, household size,
+  parcels issued, referral organisation, free-text notes.
+
+Why it is messy:
+  No surname, no DOB, no NHS number.
+  Maggie appears as "Maggie" and once as "Mags".
+  Postcode varies: "M4 6LN", "M46LN", "m4 6ln".
+  Four visits in six weeks: 28 Jul, 11 Aug, 25 Aug, 8 Sep 2026.
+
+
+5. revenues_and_energy_debt_flags.csv
+-------------------------------------
+Pretend source: Council revenues nightly extract joined to a
+                district-heat / energy debt flag.
+
+What it contains:
+  Account reference, account type (council tax or heat recharge),
+  account name as initials, a single address string, postcode,
+  balance, recovery stage, last payment, energy debt band.
+  No DOB. No NI number. UPRN is present and is a usable join key
+  when it exists.
+
+Why it is messy:
+  Maggie is "HALE M" on CTAX-M4-882341 (CT arrears £614.22) and
+  again on HEAT-ON-88421 (heat debt). Postcode mixed M4 6LN / M46LN.
+  Daniel Hale has a separate Gorton CT account still in recovery.
+
+
+6. GROUND_TRUTH.md
+------------------
+Not a source system. Team-only cheat sheet.
+Says who should merge, who must not merge, and the household
+edge (Daniel Hale shares a mobile with Maggie but is a different
+person). Do not put this file on a demo slide.
+
+
+Hero records (for matcher tests)
+--------------------------------
+1. Margaret "Maggie" Hale
+   DOB 12 March 1959
+   18 Bengal Street, Ancoats, Manchester M4 6LN
+   NHS 9434765919 (GP only)  mobile 07700 900441  UPRN 10093022184
+   Pattern: isolation + low-level hardship, no named worker.
+
+2. Callum Brennan
+   DOB 14 August 1997
+   11 Poland Street, Ancoats, Manchester M4 6BN
+   NHS 6129843301 (GP only)  mobile 07700 900882  UPRN 10093300118
+   Pattern: homelessness risk. Housing FORENAME C, postcode M46BN,
+   food bank Cal/Callum, revenues BRENNAN C with no DOB.
+   NOSP served 15/08/2026. 9 weeks rent arrears. ASC RAG Red.
+
+3. Irene Nwosu (GP spells Irena; food bank also Renie)
+   DOB 02 January 1945
+   Flat 7, 30 Redhill Street, Ancoats, Manchester M4 5AE
+   NHS 3087765412 (GP only)  landline 0161 228 4401 only  UPRN 10093411209
+   Pattern: isolation / neighbour concern. No rent or CT debt.
+   Housing FORENAME I, postcode M45AE. Hard match is the given-name drift.

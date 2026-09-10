@@ -117,11 +117,25 @@ edge (Daniel Hale shares a mobile with Maggie but is a different
 person). Do not put this file on a demo slide.
 
 
-Hero record (for matcher tests)
--------------------------------
-Name:     Margaret "Maggie" Hale
-DOB:      12 March 1959
-Address:  18 Bengal Street, Ancoats, Manchester M4 6LN
-NHS:      9434765919   (GP file only)
-Mobile:   07700 900441 (housing + GP + son's old tenancy)
-UPRN:     10093022184  (social care + revenues)
+Hero records (for matcher tests)
+--------------------------------
+1. Margaret "Maggie" Hale
+   DOB 12 March 1959
+   18 Bengal Street, Ancoats, Manchester M4 6LN
+   NHS 9434765919 (GP only)  mobile 07700 900441  UPRN 10093022184
+   Pattern: isolation + low-level hardship, no named worker.
+
+2. Callum Brennan
+   DOB 14 August 1997
+   11 Poland Street, Ancoats, Manchester M4 6BN
+   NHS 6129843301 (GP only)  mobile 07700 900882  UPRN 10093300118
+   Pattern: homelessness risk. Housing FORENAME C, postcode M46BN,
+   food bank Cal/Callum, revenues BRENNAN C with no DOB.
+   NOSP served 15/08/2026. 9 weeks rent arrears. ASC RAG Red.
+
+3. Irene Nwosu (GP spells Irena; food bank also Renie)
+   DOB 02 January 1945
+   Flat 7, 30 Redhill Street, Ancoats, Manchester M4 5AE
+   NHS 3087765412 (GP only)  landline 0161 228 4401 only  UPRN 10093411209
+   Pattern: isolation / neighbour concern. No rent or CT debt.
+   Housing FORENAME I, postcode M45AE. Hard match is the given-name drift.

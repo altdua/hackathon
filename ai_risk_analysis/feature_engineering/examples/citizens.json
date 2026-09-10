@@ -1,0 +1,19 @@
+[
+  {
+    "citizen_id": "synthetic-001",
+    "housing": [
+      {"date": "2026-07-01", "recorded_at": "2026-07-01", "arrears_amount": 250},
+      {"date": "2026-09-01", "recorded_at": "2026-09-01", "arrears_amount": 750}
+    ],
+    "appointments": [
+      {"appointment_id": "a1", "date": "2026-08-01", "recorded_at": "2026-08-01", "status": "missed"},
+      {"appointment_id": "a2", "date": "2026-08-15", "recorded_at": "2026-08-15", "status": "attended"},
+      {"appointment_id": "a3", "date": "2026-09-01", "recorded_at": "2026-09-01", "status": "missed"}
+    ],
+    "notes": [
+      {"note_id": "n1", "date": "2026-09-01", "recorded_at": "2026-09-01", "text": "DEMO social_isolation: present."},
+      {"note_id": "n2", "date": "2026-09-02", "recorded_at": "2026-09-02", "text": "DEMO housing_concern: present."}
+    ]
+  },
+  {"citizen_id": "synthetic-002", "housing": null, "appointments": [], "notes": null}
+]

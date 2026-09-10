@@ -1,0 +1,222 @@
+{
+  "resourceType": "Bundle",
+  "id": "mft-gp-extract-2026-09-08",
+  "meta": {
+    "lastUpdated": "2026-09-08T17:42:11+01:00",
+    "source": "EMIS-Web / ManchesterFT-GP-Export-v3"
+  },
+  "type": "searchset",
+  "timestamp": "2026-09-08T17:42:11+01:00",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:7c2a1e90-4b11-4d3a-9f0e-81a6c0b4e201",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-9434765919",
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "9434765919"
+          },
+          {
+            "system": "https://emis.com/Id/PatientNumber",
+            "value": "EMIS-ANC-104882"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "Hale",
+            "given": ["Maggie"],
+            "prefix": ["Mrs"]
+          },
+          {
+            "use": "old",
+            "family": "Hale",
+            "given": ["Margaret"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1959-03-12",
+        "address": [
+          {
+            "use": "home",
+            "line": ["18 Bengal Street", "New Islington"],
+            "city": "Manchester",
+            "postalCode": "M4 6LN",
+            "country": "GB"
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "07700 900441",
+            "use": "mobile"
+          }
+        ],
+        "extension": [
+          {
+            "url": "https://fhir.nhs.uk/StructureDefinition/Extension-household-status",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "224137008",
+                  "display": "Lives alone"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7c2a1e90-4b11-4d3a-9f0e-81a6c0b4e202",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "cond-104882-dep",
+        "subject": { "reference": "Patient/pat-9434765919" },
+        "clinicalStatus": { "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/condition-clinical", "code": "active" }] },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "35489007",
+              "display": "Depressive disorder"
+            }
+          ],
+          "text": "Depression (recurrent) - QOF register"
+        },
+        "onsetDateTime": "2024-11-03",
+        "recordedDate": "2024-11-03"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7c2a1e90-4b11-4d3a-9f0e-81a6c0b4e211",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appt-104882-20260714",
+        "status": "noshow",
+        "description": "DNA - Practice nurse / chronic disease review",
+        "start": "2026-07-14T10:20:00+01:00",
+        "end": "2026-07-14T10:40:00+01:00",
+        "participant": [
+          { "actor": { "reference": "Patient/pat-9434765919" }, "status": "declined" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7c2a1e90-4b11-4d3a-9f0e-81a6c0b4e212",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appt-104882-20260804",
+        "status": "noshow",
+        "description": "DNA - GP follow-up (mood / medication review)",
+        "start": "2026-08-04T15:00:00+01:00",
+        "end": "2026-08-04T15:10:00+01:00",
+        "participant": [
+          { "actor": { "reference": "Patient/pat-9434765919" }, "status": "declined" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7c2a1e90-4b11-4d3a-9f0e-81a6c0b4e213",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appt-104882-20260901",
+        "status": "noshow",
+        "description": "DNA - GP",
+        "start": "2026-09-01T09:30:00+01:00",
+        "end": "2026-09-01T09:40:00+01:00",
+        "participant": [
+          { "actor": { "reference": "Patient/pat-9434765919" }, "status": "declined" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa11bb22-4b11-4d3a-9f0e-81a6c0b4e301",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-4010239818",
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "4010239818"
+          }
+        ],
+        "name": [{ "use": "usual", "family": "Smith", "given": ["John", "Michael"] }],
+        "gender": "male",
+        "birthDate": "1978-01-15",
+        "address": [
+          {
+            "use": "home",
+            "line": ["9 Bonsall Street"],
+            "city": "Manchester",
+            "postalCode": "M15 6EE"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aa11bb22-4b11-4d3a-9f0e-81a6c0b4e302",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appt-smith-jm-20260902",
+        "status": "fulfilled",
+        "description": "Attended - asthma review",
+        "start": "2026-09-02T11:00:00+01:00",
+        "participant": [
+          { "actor": { "reference": "Patient/pat-4010239818" }, "status": "accepted" }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb33cc44-4b11-4d3a-9f0e-81a6c0b4e401",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-6875542103",
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "6875542103"
+          }
+        ],
+        "name": [{ "use": "usual", "family": "Smith", "given": ["John"] }],
+        "gender": "male",
+        "birthDate": "1952-11-03",
+        "address": [
+          {
+            "use": "home",
+            "line": ["9 Bonsall Court"],
+            "city": "Manchester",
+            "postalCode": "M15 6EF"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cc55dd66-4b11-4d3a-9f0e-81a6c0b4e501",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "pat-2201987765",
+        "identifier": [
+          {
+            "system": "https://fhir.nhs.uk/Id/nhs-number",
+            "value": "2201987765"
+          }
+        ],
+        "name": [{ "use": "usual", "family": "Rahman", "given": ["Aisha"] }],
+        "gender": "female",
+        "birthDate": "1990-07-22",
+        "address": [
+          {
+            "use": "home",
+            "line": ["4 Varley Street"],
+            "city": "Manchester",
+            "postalCode": "M40 7QW"
+          }
+        ]
+      }
+    }
+  ]
+}

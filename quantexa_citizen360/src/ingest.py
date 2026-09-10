@@ -96,8 +96,7 @@ def ingest_gp(path: Path) -> list[dict]:
                     record_type="patient",
                     family=family,
                     given=given,
-                    name_display=" ".join(
-                        p for p in [given, family] if p) or None,
+                    name_display=" ".join(p for p in [given, family] if p) or None,
                     dob_raw=res.get("birthDate"),
                     sex_raw=res.get("gender"),
                     address_raw=", ".join(
@@ -111,12 +110,18 @@ def ingest_gp(path: Path) -> list[dict]:
                 )
             )
         elif rtype in {"Appointment", "Condition"}:
-            subject = (res.get("subject") or {}).get("reference", "")
+            subject = (res.get("subject") or {}).get("reference") or ""
+            if not subject:
+                for part in res.get("participant") or []:
+                    subject = (part.get("actor") or {}).get("reference") or ""
+                    if subject:
+                        break
             rows.append(
                 _row(
                     source="gp_emis",
                     source_record_id=res.get("id"),
                     record_type=rtype.lower(),
+                    name_display=subject or None,
                     payload_json={
                         "subject": subject,
                         "status": res.get("status") or (res.get("clinicalStatus") or {}),
